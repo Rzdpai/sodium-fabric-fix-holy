@@ -1,6 +1,5 @@
 package net.caffeinemc.mods.sodium.client.compatibility.checks;
 
-import net.jellysquid.mods.sodium.client.SodiumClientMod;
 import net.caffeinemc.mods.sodium.client.gui.console.Console;
 import net.caffeinemc.mods.sodium.client.gui.console.message.MessageLevel;
 import net.minecraft.network.chat.Component;
@@ -16,9 +15,11 @@ public class PostLaunchChecks {
 
     public static void onContextInitialized() {
         // FIXME: This can be determined earlier, but we can't access the GUI classes in pre-launch
-        if ((!SodiumClientMod.options().pojav.noLongerWarnPojavLauncher) && isUsingPojavLauncher()) {
-            Console.instance().logMessage(MessageLevel.WARN, Text.translatable("sodium.console.pojav_launcher"), 30.0);
-            LOGGER.info("modified version of Sodium is running on PojavLauncher, if you run into any problems please report the problem to ConfectionaryQwQ and not to the Sodium team");
+        if (isUsingPojavLauncher()) {
+            Console.instance().logMessage(MessageLevel.SEVERE, Component.translatable("sodium.console.pojav_launcher"), 30.0);
+            LOGGER.error("It appears that PojavLauncher is being used with an OpenGL compatibility layer. This will " +
+                    "likely cause severe performance issues, graphical issues, and crashes when used with Sodium. This " +
+                    "configuration is not supported -- you are on your own!");
         }
     }
 
