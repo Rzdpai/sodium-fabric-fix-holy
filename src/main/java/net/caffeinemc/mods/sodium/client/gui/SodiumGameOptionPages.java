@@ -358,16 +358,6 @@ public class SodiumGameOptionPages {
                 )
                 .build());
 
-        groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(int.class, sodiumOpts)
-                        .setName(Component.translatable("sodium.options.pojav_launcher"))
-                        .setTooltip(Component.translatable("sodium.options.pojav_launcher.tooltip"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.pojav.noLongerWarnPojavLauncher = value, opts -> opts.pojav.noLongerWarnPojavLauncher)
-                        .build()
-                )
-                .build());
-
         return new OptionPage(Component.translatable("sodium.options.pages.advanced"), ImmutableList.copyOf(groups));
     }
 }
