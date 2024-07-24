@@ -64,7 +64,6 @@ public class SodiumOptionsGUI extends Screen implements ScreenPromptable {
         this.pages.add(SodiumGameOptionPages.quality());
         this.pages.add(SodiumGameOptionPages.performance());
         this.pages.add(SodiumGameOptionPages.advanced());
-        this.pages.add(SodiumGameOptionPages.pojavLauncher());
 
         this.checkPromptTimers();
     }
