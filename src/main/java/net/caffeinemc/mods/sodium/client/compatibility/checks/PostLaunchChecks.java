@@ -15,8 +15,7 @@ public class PostLaunchChecks {
 
     public static void onContextInitialized() {
         // FIXME: This can be determined earlier, but we can't access the GUI classes in pre-launch
-        if (isUsingFoldCraftLauncher()) {
-            Console.instance().logMessage(MessageLevel.SEVERE, Component.translatable("sodium.console.pojav_launcher"), 30.0);
+        if (isUsingPojavLauncher()) {
             LOGGER.error("It appears that PojavLauncher is being used with an OpenGL compatibility layer. This will " +
                     "likely cause severe performance issues, graphical issues, and crashes when used with Sodium. This " +
                     "configuration is not supported -- you are on your own!");
@@ -24,7 +23,7 @@ public class PostLaunchChecks {
     }
 
     // https://github.com/CaffeineMC/sodium-fabric/issues/1916
-    private static boolean isUsingFoldCraftLauncher() {
+    private static boolean isUsingPojavLauncher() {
         if (System.getenv("POJAV_RENDERER") != null) {
             LOGGER.warn("Detected presence of environment variable POJAV_LAUNCHER, which seems to indicate we are running on Android");
 
@@ -54,7 +53,7 @@ public class PostLaunchChecks {
         return false;
     }
 
-    private static boolean isKnownFndroidPathFragment(String path) {
+    private static boolean isKnownAndroidPathFragment(String path) {
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
 }
