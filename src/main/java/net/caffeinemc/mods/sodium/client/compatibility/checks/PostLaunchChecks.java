@@ -1,6 +1,3 @@
-//
-// Decompiled by Jadx - 4453ms
-//
 package me.jellysquid.mods.sodium.client.compatibility.checks;
 
 import me.jellysquid.mods.sodium.client.gui.console.Console;
