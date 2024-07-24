@@ -360,4 +360,20 @@ public class SodiumGameOptionPages {
 
         return new OptionPage(Component.translatable("sodium.options.pages.advanced"), ImmutableList.copyOf(groups));
     }
+
+    public static OptionPage pojavLauncher() {
+        List<OptionGroup> groups = new ArrayList<>();
+
+        groups.add(OptionGroup.createBuilder()
+                .add(OptionImpl.createBuilder(boolean.class, sodiumOpts)
+                        .setName(Text.translatable("sodium.options.pojav_launcher"))
+                        .setTooltip(Text.translatable("sodium.options.pojav_launcher.tooltip"))
+                        .setControl(TickBoxControl::new)
+                        .setBinding((opts, value) -> opts.pojav.noLongerWarnPojavLauncher = value, opts -> opts.pojav.noLongerWarnPojavLauncher)
+                        .build()
+                )
+                .build());
+
+        return new OptionPage(Text.translatable("sodium.options.pages.pojav_launcher"), ImmutableList.copyOf(groups));
+    }
 }
