@@ -14,7 +14,12 @@ jobs:
         with:
           repository: 'Rzdpai/sodium-fabric-fix-holy'
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # 确保获取完整的历史记录
+          ref: 'dev'
+
+      - name: Configure Git user
+        run: |
+          git config user.email "3420176748@qq.com"
+          git config user.name "RzdPai"
 
       - name: Fetch latest changes from the source repository
         run: |
