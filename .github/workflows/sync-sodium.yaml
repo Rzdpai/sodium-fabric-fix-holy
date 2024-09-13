@@ -14,11 +14,12 @@ jobs:
         with:
           repository: 'Rzdpai/sodium-fabric-fix-holy'
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # 确保获取完整的历史记录
 
       - name: Fetch latest changes from the source repository
         run: |
           git fetch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/CaffeineMC/sodium-fabric.git dev
-          git merge FETCH_HEAD
+          git merge FETCH_HEAD --allow-unrelated-histories
 
       - name: Push changes to the target repository
         run: |
