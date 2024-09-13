@@ -1,0 +1,44 @@
+name: Upload Release Asset
+
+on:
+  workflow_dispatch:
+    # 允许手动触发
+  push:
+    tags:
+      - 'v*' # 匹配类似v1.0, v2.0这样的标签
+
+jobs:
+  upload-release-asset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+          path: ./build-artifact
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release notes for ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build-artifact/sodium-artifacts-dev
+          asset_name: sodium-artifacts-dev
+          asset_content_type: application/octet-stream

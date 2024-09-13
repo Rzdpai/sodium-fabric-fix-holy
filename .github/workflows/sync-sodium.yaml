@@ -1,0 +1,25 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小时执行一次
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v2
+        with:
+          repository: 'Rzdpai/sodium-fabric-fix-holy'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch latest changes from the source repository
+        run: |
+          git fetch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/CaffeineMC/sodium-fabric.git main
+          git merge FETCH_HEAD
+
+      - name: Push changes to the target repository
+        run: |
+          git push origin main
