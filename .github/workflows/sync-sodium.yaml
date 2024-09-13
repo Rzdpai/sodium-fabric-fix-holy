@@ -17,7 +17,7 @@ jobs:
 
       - name: Fetch latest changes from the source repository
         run: |
-          git fetch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/CaffeineMC/sodium-fabric.git main
+          git fetch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/CaffeineMC/sodium-fabric.git dev
           git merge FETCH_HEAD
 
       - name: Push changes to the target repository
